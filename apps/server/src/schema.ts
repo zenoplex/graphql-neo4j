@@ -1,3 +1,5 @@
+export const typeDefs = `#graphql
+
 type Business {
   businessId: ID!
   name: String
@@ -44,3 +46,4 @@ enum BusinessOrdering {
   name_asc
   name_desc
 }
+`;
