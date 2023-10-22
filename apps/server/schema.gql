@@ -35,6 +35,12 @@ type Query {
     search: String
     first: Int = 10
     offset: Int = 0
+    orderBy: BusinessOrdering = name_asc
   ): [Business!]!
   userById(userId: ID!): User
+}
+
+enum BusinessOrdering {
+  name_asc
+  name_desc
 }
