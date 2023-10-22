@@ -3,8 +3,8 @@ type Business {
   name: String
   address: String
   avgStars: Float
-  photos: [Photo!]!
-  reviews: [Review!]!
+  photos(first: Int = 3, offset: Int = 0): [Photo!]!
+  reviews(first: Int = 3, offset: Int = 0): [Review!]!
 }
 
 type User {
@@ -30,7 +30,11 @@ type Review {
 }
 
 type Query {
-  allBusinesses: [Business!]!
-  businessBySearchTerm(search: String!): [Business!]!
+  allBusinesses(first: Int = 10, offset: Int = 0): [Business!]!
+  businessBySearchTerm(
+    search: String
+    first: Int = 10
+    offset: Int = 0
+  ): [Business!]!
   userById(userId: ID!): User
 }
