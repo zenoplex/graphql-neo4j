@@ -34,7 +34,7 @@ type Review {
 type Query {
   allBusinesses(first: Int = 10, offset: Int = 0): [Business!]!
   businessBySearchTerm(
-    search: String
+    search: String!
     first: Int = 10
     offset: Int = 0
     orderBy: BusinessOrdering = name_asc
