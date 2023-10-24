@@ -1,4 +1,4 @@
-import type { GraphQLResolveInfo, GraphQLTypeResolver } from 'graphql';
+import type { GraphQLResolveInfo } from 'graphql';
 import type { Db } from './db';
 import { split } from './utils';
 
@@ -45,6 +45,19 @@ export const resolvers = {
           return v.reviewId === review
         })
       })
+    },
+    avgStars: (obj: Business, _args: unknown, context: Context, _info: GraphQLResolveInfo) => {
+      const reviews = obj.reviewIds.map(review => {
+        return context.db.reviews.find(v => {
+          return v.reviewId === review
+        })
+      });
+      return reviews.reduce((acc, review) => {
+        if (review === undefined) {
+          return acc;
+        }
+        return acc + review.stars
+      }, 0) / reviews.length;
     }
   }
 }
