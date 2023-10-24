@@ -1,12 +1,12 @@
-import { ApolloServer } from 'apollo-server';
-import { typeDefs } from './schema';
-import { resolvers } from './resolvers';
-import { db } from './db';
+import { ApolloServer } from "apollo-server";
+import { typeDefs } from "./schema";
+import { resolvers } from "./resolvers";
+import { db } from "./db";
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: { db}
+  context: { db },
 });
 
 const { url } = await server.listen();
