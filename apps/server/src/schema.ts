@@ -25,7 +25,7 @@ type Photo {
 
 type Review {
   reviewId: ID!
-  start: Float
+  stars: Float
   text: String
   user: User!
   business: Business!
