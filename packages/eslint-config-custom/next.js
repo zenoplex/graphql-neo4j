@@ -19,7 +19,9 @@ module.exports = {
     "@vercel/style-guide/eslint/react",
     "@vercel/style-guide/eslint/next",
     "eslint-config-turbo",
-  ].map(require.resolve),
+  ].map(require.resolve).concat([
+    'plugin:prettier/recommended'
+  ]),
   parserOptions: {
     project,
   },
