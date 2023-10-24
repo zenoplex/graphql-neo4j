@@ -13,3 +13,8 @@ export const split = <T extends string, S extends string>(
 ): Split<T, S> => {
   return value.split(separator) as Split<T, S>;
 }
+
+
+export const dropUndefined = <T>(value: T | undefined): value is T => {
+  return value !== undefined;
+}

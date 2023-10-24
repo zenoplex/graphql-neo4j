@@ -1,6 +1,6 @@
 import type { GraphQLResolveInfo } from 'graphql';
 import type { Db } from './db';
-import { split } from './utils';
+import { dropUndefined, split } from './utils';
 
 interface Context {
   db: Db;
@@ -51,11 +51,9 @@ export const resolvers = {
         return context.db.reviews.find(v => {
           return v.reviewId === review
         })
-      });
+      }).filter(dropUndefined);
+      
       return reviews.reduce((acc, review) => {
-        if (review === undefined) {
-          return acc;
-        }
         return acc + review.stars
       }, 0) / reviews.length;
     }
