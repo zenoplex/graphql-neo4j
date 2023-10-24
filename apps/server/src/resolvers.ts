@@ -1,4 +1,4 @@
-import type { GraphQLResolveInfo } from 'graphql';
+import type { GraphQLResolveInfo, GraphQLTypeResolver } from 'graphql';
 import type { Db } from './db';
 import { split } from './utils';
 
@@ -36,6 +36,15 @@ export const resolvers = {
 
       return context.db.businesses.filter(business => business.name.includes(args.search)).slice(args.offset, args.first)
       .sort(compare);
+    }
+  },
+  Business: {
+    reviews: (obj: Business, _args: unknown, context: Context, _info: GraphQLResolveInfo) => {
+      return obj.reviewIds.map(review => {
+        return context.db.reviews.find(v => {
+          return v.reviewId === review
+        })
+      })
     }
   }
 }
