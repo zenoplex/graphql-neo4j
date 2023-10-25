@@ -7,6 +7,7 @@ interface Context {
 }
 
 type Business = Db["businesses"][number];
+type User = Db["users"][number];
 type Review = Db["reviews"][number];
 
 interface BusinessBySearchTermArgs {
@@ -94,6 +95,20 @@ export const resolvers = {
     ) => {
       return context.db.users.find((user) => {
         return obj.userId === user.userId;
+      });
+    },
+  },
+  User: {
+    reviews: (
+      obj: User,
+      _args: unknown,
+      context: Context,
+      _info: GraphQLResolveInfo,
+    ) => {
+      return obj.reviewIds.map((reviewId) => {
+        return context.db.reviews.find((review) => {
+          return review.reviewId === reviewId;
+        });
       });
     },
   },
