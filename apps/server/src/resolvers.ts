@@ -7,6 +7,7 @@ interface Context {
 }
 
 type Business = Db["businesses"][number];
+type Review = Db["reviews"][number];
 
 interface BusinessBySearchTermArgs {
   search: string;
@@ -82,6 +83,18 @@ export const resolvers = {
           return acc + review.stars;
         }, 0) / reviews.length
       );
+    },
+  },
+  Review: {
+    user: (
+      obj: Review,
+      _args: unknown,
+      context: Context,
+      _info: GraphQLResolveInfo,
+    ) => {
+      return context.db.users.find((user) => {
+        return obj.userId === user.userId;
+      });
     },
   },
 };
