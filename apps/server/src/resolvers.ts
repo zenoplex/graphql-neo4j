@@ -100,6 +100,16 @@ export const resolvers = {
         return obj.userId === user.userId;
       });
     },
+    business: (
+      obj: Review,
+      _args: unknown,
+      context: Context,
+      _info: GraphQLResolveInfo,
+    ) => {
+      return context.db.businesses.find((business) => {
+        return obj.businessId === business.businessId;
+      });
+    },
   },
   User: {
     reviews: (
