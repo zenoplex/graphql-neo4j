@@ -51,6 +51,9 @@ export const resolvers = {
         .slice(args.offset, args.first)
         .sort(compare);
     },
+    userById: (_obj: unknown, args: { userId: string }, context: Context) => {
+      return context.db.users.find((user) => user.userId === args.userId);
+    },
   },
   Business: {
     reviews: (
