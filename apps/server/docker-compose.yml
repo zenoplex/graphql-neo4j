@@ -2,7 +2,7 @@ version: '3.6'
 services:
   db:
     container_name: neo4j_container
-    image: neo4j:4.4.26
+    image: neo4j:4.4.26-enterprise
     env_file: .env
     ports:
       - 7474:7474
