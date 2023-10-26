@@ -13,8 +13,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@neo4j/graphql": "3.24.3",
     "apollo-server": "3.12.1",
-    "graphql": "16.8.1"
+    "graphql": "16.8.1",
+    "neo4j-driver": "4.4.11"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
