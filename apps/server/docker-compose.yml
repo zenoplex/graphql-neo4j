@@ -1,4 +1,4 @@
-version: '3'
+version: '3.6'
 services:
   db:
     container_name: neo4j_container
@@ -7,8 +7,10 @@ services:
     ports:
       - 7474:7474
       - 7687:7687
-    volumes: 
-      - volume_db:/var/lib/neo4j/data
+    volumes:
+      - type: volume
+        source: volume_db
+        target: /data
 volumes:
   volume_db:
     name: vneo4j
