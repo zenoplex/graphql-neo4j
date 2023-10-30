@@ -11,6 +11,17 @@ services:
       - type: volume
         source: volume_db
         target: /data
+      - type: volume
+        source: volume_neo4j_plugins
+        target: /plugins
+    environment:
+      - NEO4JLABS_PLUGINS=["apoc"]
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_apoc_import_file_use__neo4j__config=true
 volumes:
   volume_db:
     name: vneo4j
+  volume_neo4j_plugins:
+    name: vneo4j_plugins
+    
