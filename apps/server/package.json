@@ -6,7 +6,7 @@
   "exports": "./index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "dotenv -e .env -- tsup --watch --onSuccess \"node dist/index.js\"",
+    "dev": "DEBUG=@neo4j/graphql:* dotenv -e .env -- tsup --watch --onSuccess \"node dist/index.js\"",
     "build": "dotenv -e .env -- tsup",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
