@@ -6,12 +6,13 @@
   "exports": "./index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "DEBUG=@neo4j/graphql:* dotenv -e .env -- tsup --watch --onSuccess \"node dist/index.js\"",
+    "dev": "DEBUG=@neo4j/graphql:* dotenv -e .env -- tsup --watch --onSuccess \"npm run copy-schema && node dist/index.js\"",
     "build": "dotenv -e .env -- tsup",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "introspect": "dotenv -e .env -- tsup src/introspect.ts --onSuccess \"node dist/introspect.js\""
+    "introspect": "dotenv -e .env -- tsup src/introspect.ts --onSuccess \"node dist/introspect.js\"",
+    "copy-schema": "cp schema.graphql dist/schema.graphql"
   },
   "dependencies": {
     "@neo4j/graphql": "3.24.3",
