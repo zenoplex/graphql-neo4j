@@ -13,7 +13,7 @@ export const typeDefs = `#graphql
 
   type Business {
     businessId: ID!
-    waitTime: Int! @computed
+    waitTime: Int! @customResolver
     averageStars: Float!
       @cypher(
         statement: "MATCH (this)<-[:REVIEWS]-(r:Review) RETURN avg(r.stars)"
