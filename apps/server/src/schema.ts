@@ -2,6 +2,8 @@ export const typeDefs = `#graphql
   type Query {
     fuzzyBusinessByName(searchString: String): [Business!]!
       @cypher(
+        # First create full-text index
+        # CREATE FULLTEXT INDEX businessNameIndex FOR (n:Business) ON EACH [n.name]
         statement: """
         CALL db.index.fulltext.queryNodes( 'businessNameIndex', $searchString+'~')
         YIELD node RETURN node
