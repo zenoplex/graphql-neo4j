@@ -52,4 +52,10 @@ type Review {
 type Category {
   name: String!
   businesses: [Business!]! @relationship(type: "IN_CATEGORY", direction: IN)
+	count: Int!
+	  @cypher(
+			statement: """
+			MATCH (this)<-[:IN_CATEGORY]-(b:Business) with b RETURN COUNT(b)
+			"""
+		)
 }
