@@ -10,10 +10,12 @@
     "build": "dotenv -e .env -- tsup",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "introspect": "dotenv -e .env -- tsup src/introspect.ts --onSuccess \"node dist/introspect.js\""
   },
   "dependencies": {
     "@neo4j/graphql": "3.24.3",
+    "@neo4j/introspector": "1.0.3",
     "apollo-server": "3.12.1",
     "graphql": "16.8.1",
     "neo4j-driver": "4.4.11"
