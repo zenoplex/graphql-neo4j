@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "name": "tailwind-config",
+  "version": "0.0.1",
+  "description": "tailwind config",
+  "author": "Gen Ichino <zenoplex@gmail.com>",
+  "license": "MIT"
+}
