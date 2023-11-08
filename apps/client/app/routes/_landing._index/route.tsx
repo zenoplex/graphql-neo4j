@@ -1,7 +1,10 @@
-import type { MetaFunction } from "@remix-run/cloudflare";
+import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
 import { Select, Label } from "ui";
 import { BusinessResults } from "./BusinessResults";
-import type { Business } from "./types";
+import { apolloClient } from "~/lib/apolloClient.server";
+import { useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/cloudflare";
+import { gql } from "@apollo/client";
 
 export const meta: MetaFunction = () => {
   return [
@@ -10,28 +13,29 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-const businesses: Business[] = [
-  {
-    businessId: "b1",
-    name: "San Mateo Public Library",
-    address: "55 W 3rd Ave",
-    category: "Library",
-  },
-  {
-    businessId: "b2",
-    name: "Ducky's Car Wash",
-    address: "716 N San Mateo Dr",
-    category: "Car Wash",
-  },
-  {
-    businessId: "b3",
-    name: "Hanabi",
-    address: "723 California Dr",
-    category: "Restaurant",
-  },
-];
+// TODO: type annotate
+export const loader: LoaderFunction = async () => {
+  const response = await apolloClient.query({
+    query: gql`
+      {
+        businesses {
+          businessId
+          name
+          address
+          categories {
+            name
+          }
+        }
+      }
+    `,
+  });
+
+  return json(response.data);
+};
 
 export default function Index() {
+  const data = useLoaderData<typeof loader>();
+
   return (
     <div className="grid grid-flow-row px-4 sm:px-6 lg:px-8 gap-5">
       <div className="mt-8 flow-root">
@@ -55,7 +59,7 @@ export default function Index() {
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-              <BusinessResults businesses={businesses} />
+              <BusinessResults businesses={data.businesses} />
             </div>
           </div>
         </div>
