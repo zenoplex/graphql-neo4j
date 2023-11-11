@@ -1,4 +1,5 @@
 scalar CustomPoint
+scalar CustomDate
 
 type Query {
   fuzzyBusinessByName(searchString: String): [Business!]!
@@ -45,7 +46,7 @@ type User {
 type Review {
   reviewId: ID!
   stars: Float!
-  date: Date!
+  date: CustomDate! @customResolver
   text: String
   user: User! @relationship(type: "WROTE", direction: IN)
   business: Business! @relationship(type: "REVIEWS", direction: OUT)

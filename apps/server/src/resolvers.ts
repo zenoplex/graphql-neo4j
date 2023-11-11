@@ -1,5 +1,5 @@
 import type { GraphQLResolveInfo } from "graphql";
-import type { Point } from "neo4j-driver";
+import type { Date, Point } from "neo4j-driver";
 
 type Context = unknown;
 
@@ -22,6 +22,12 @@ export const resolvers = {
     ) => {
       const { location } = obj;
       return { latitude: location.x, longitude: location.y };
+    },
+  },
+  Review: {
+    date: (obj: { date: Date }) => {
+      const { date } = obj;
+      return date.toString();
     },
   },
 };
