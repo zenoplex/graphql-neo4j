@@ -1,0 +1,5 @@
+query getBusinessesByCategory($searchString: String!) {
+    fuzzyBusinessByName(searchString: $searchString) {
+      businessId
+    }
+  }
