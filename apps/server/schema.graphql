@@ -1,3 +1,5 @@
+# Custom scalar types are defined so graphql-codegen can generate w/o errors
+# Simply defining scalar Point or Date will result in error on @neo4j/graphql error
 scalar CustomPoint
 scalar CustomDate
 
