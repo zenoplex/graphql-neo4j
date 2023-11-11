@@ -1,3 +1,5 @@
+scalar CustomPoint
+
 type Query {
   fuzzyBusinessByName(searchString: String): [Business!]!
     @cypher(
@@ -29,7 +31,7 @@ type Business {
   city: String!
   state: String!
   address: String!
-  location: Point!
+  location: CustomPoint! @customResolver
   reviews: [Review!]! @relationship(type: "REVIEWS", direction: IN)
   categories: [Category!]! @relationship(type: "IN_CATEGORY", direction: OUT)
 }

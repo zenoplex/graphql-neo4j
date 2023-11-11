@@ -1,4 +1,5 @@
 import type { GraphQLResolveInfo } from "graphql";
+import type { Point } from "neo4j-driver";
 
 type Context = unknown;
 
@@ -12,6 +13,15 @@ export const resolvers = {
     ) => {
       const options = [0, 5, 10, 15, 30, 45];
       return options[Math.floor(Math.random() * options.length)];
+    },
+    location: (
+      obj: { location: Point },
+      _args: unknown,
+      _context: Context,
+      _info: GraphQLResolveInfo,
+    ) => {
+      const { location } = obj;
+      return { latitude: location.x, longitude: location.y };
     },
   },
 };
