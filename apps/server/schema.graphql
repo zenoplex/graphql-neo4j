@@ -78,5 +78,24 @@ input BusinessWhere {
   name_STARTS_WITH: String
   name_NOT_STARTS_WITH: String
   name_ENDS_WITH: String
-  name_NOT_ENDS_WITH: String
+  name_NOT_ENDS_WITH: String,
+  categories_SOME: CategoryWhere
+  categories_SINGLE: CategoryWhere
+  categories_NONE: CategoryWhere
+  categories_ALL: CategoryWhere  
+}
+
+input CategoryWhere {
+  OR:[CategoryWhere!]
+  NOT:CategoryWhere
+  AND:[CategoryWhere!]
+  name_STARTS_WITH: String
+  name_IN: [String!]
+  name_ENDS_WITH:String
+  name_CONTAINS:String
+  name:String
+  businesses_SOME:BusinessWhere
+  businesses_SINGLE:BusinessWhere
+  businesses_NONE:BusinessWhere
+  businesses_ALL:BusinessWhere
 }

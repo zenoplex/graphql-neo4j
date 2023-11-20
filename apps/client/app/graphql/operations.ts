@@ -57,6 +57,10 @@ export type BusinessRecommendedArgs = {
 export type BusinessWhere = {
   AND?: InputMaybe<Array<BusinessWhere>>;
   OR?: InputMaybe<Array<BusinessWhere>>;
+  categories_ALL?: InputMaybe<CategoryWhere>;
+  categories_NONE?: InputMaybe<CategoryWhere>;
+  categories_SINGLE?: InputMaybe<CategoryWhere>;
+  categories_SOME?: InputMaybe<CategoryWhere>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   name_CONTAINS?: InputMaybe<Scalars["String"]["input"]>;
   name_ENDS_WITH?: InputMaybe<Scalars["String"]["input"]>;
@@ -74,6 +78,21 @@ export type Category = {
   businesses: Array<Business>;
   count: Scalars["Int"]["output"];
   name: Scalars["String"]["output"];
+};
+
+export type CategoryWhere = {
+  AND?: InputMaybe<Array<CategoryWhere>>;
+  NOT?: InputMaybe<CategoryWhere>;
+  OR?: InputMaybe<Array<CategoryWhere>>;
+  businesses_ALL?: InputMaybe<BusinessWhere>;
+  businesses_NONE?: InputMaybe<BusinessWhere>;
+  businesses_SINGLE?: InputMaybe<BusinessWhere>;
+  businesses_SOME?: InputMaybe<BusinessWhere>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  name_CONTAINS?: InputMaybe<Scalars["String"]["input"]>;
+  name_ENDS_WITH?: InputMaybe<Scalars["String"]["input"]>;
+  name_IN?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  name_STARTS_WITH?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type Query = {
