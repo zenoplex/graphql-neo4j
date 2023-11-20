@@ -4,13 +4,7 @@ scalar CustomPoint
 scalar CustomDate
 
 type Query {
-  businesses(searchString: String): [Business!]!
-    @cypher(
-      statement: """
-      MATCH (b:Business)
-      RETURN b
-      """
-    )
+  businesses(where: BusinessWhere): [Business!]!
   fuzzyBusinessByName(searchString: String): [Business!]!
     @cypher(
       # First create full-text index
@@ -70,4 +64,19 @@ type Category {
 			MATCH (this)<-[:IN_CATEGORY]-(b:Business) with b RETURN COUNT(b)
 			"""
 		)
+}
+
+input BusinessWhere {
+  OR: [BusinessWhere!]
+  AND: [BusinessWhere!]
+  name: String
+  name_NOT: String
+  name_IN: [String!]
+  name_NOT_IN: [String!]
+  name_CONTAINS: String
+  name_NOT_CONTAINS: String
+  name_STARTS_WITH: String
+  name_NOT_STARTS_WITH: String
+  name_ENDS_WITH: String
+  name_NOT_ENDS_WITH: String
 }

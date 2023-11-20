@@ -4,8 +4,8 @@ query getBusinessesByCategory($searchString: String!) {
     }
   }
 
-query getBusinesses($searchString: String) {
-  businesses(searchString: $searchString) {
+query getBusinesses($where: BusinessWhere) {
+  businesses(where: $where) {
     businessId
     name
     address
