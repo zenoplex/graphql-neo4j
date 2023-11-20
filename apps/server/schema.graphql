@@ -4,6 +4,13 @@ scalar CustomPoint
 scalar CustomDate
 
 type Query {
+  businesses(searchString: String): [Business!]!
+    @cypher(
+      statement: """
+      MATCH (b:Business)
+      RETURN b
+      """
+    )
   fuzzyBusinessByName(searchString: String): [Business!]!
     @cypher(
       # First create full-text index
