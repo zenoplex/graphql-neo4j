@@ -1,10 +1,9 @@
-import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
+import type { MetaFunction } from "@remix-run/cloudflare";
 import { Select, Label } from "ui";
 import { BusinessResults } from "./BusinessResults";
 import { apolloClient } from "~/lib/apolloClient.server";
 import { useLoaderData } from "@remix-run/react";
-import { json } from "@remix-run/cloudflare";
-import { gql } from "@apollo/client";
+import { GetBusinessesDocument } from "~/graphql/operations";
 
 export const meta: MetaFunction = () => {
   return [
@@ -13,24 +12,12 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-// TODO: type annotate
-export const loader: LoaderFunction = async () => {
+export const loader = async () => {
   const response = await apolloClient.query({
-    query: gql`
-      {
-        businesses {
-          businessId
-          name
-          address
-          categories {
-            name
-          }
-        }
-      }
-    `,
+    query: GetBusinessesDocument,
   });
 
-  return json(response.data);
+  return response.data;
 };
 
 export default function Index() {

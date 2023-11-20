@@ -1,7 +1,7 @@
-import type { Business } from "./types";
+import type { GetBusinessesQuery } from "~/graphql/operations";
 
 type Props = {
-  businesses: Business[];
+  businesses: GetBusinessesQuery["businesses"];
 };
 
 export function BusinessResults({ businesses }: Props): JSX.Element {
@@ -39,7 +39,7 @@ export function BusinessResults({ businesses }: Props): JSX.Element {
               {business.address}
             </td>
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-              {business.category}
+              {business.categories.map((category) => category.name).join(", ")}
             </td>
           </tr>
         ))}
