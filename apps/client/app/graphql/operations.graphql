@@ -3,3 +3,14 @@ query getBusinessesByCategory($searchString: String!) {
       businessId
     }
   }
+
+query getBusinesses($searchString: String) {
+  businesses(searchString: $searchString) {
+    businessId
+    name
+    address
+    categories {
+      name
+    }
+  }
+}
