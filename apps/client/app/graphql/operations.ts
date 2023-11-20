@@ -54,6 +54,21 @@ export type BusinessRecommendedArgs = {
   first?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
+export type BusinessWhere = {
+  AND?: InputMaybe<Array<BusinessWhere>>;
+  OR?: InputMaybe<Array<BusinessWhere>>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  name_CONTAINS?: InputMaybe<Scalars["String"]["input"]>;
+  name_ENDS_WITH?: InputMaybe<Scalars["String"]["input"]>;
+  name_IN?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  name_NOT?: InputMaybe<Scalars["String"]["input"]>;
+  name_NOT_CONTAINS?: InputMaybe<Scalars["String"]["input"]>;
+  name_NOT_ENDS_WITH?: InputMaybe<Scalars["String"]["input"]>;
+  name_NOT_IN?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  name_NOT_STARTS_WITH?: InputMaybe<Scalars["String"]["input"]>;
+  name_STARTS_WITH?: InputMaybe<Scalars["String"]["input"]>;
+};
+
 export type Category = {
   __typename?: "Category";
   businesses: Array<Business>;
@@ -68,7 +83,7 @@ export type Query = {
 };
 
 export type QueryBusinessesArgs = {
-  searchString?: InputMaybe<Scalars["String"]["input"]>;
+  where?: InputMaybe<BusinessWhere>;
 };
 
 export type QueryFuzzyBusinessByNameArgs = {
@@ -102,7 +117,7 @@ export type GetBusinessesByCategoryQuery = {
 };
 
 export type GetBusinessesQueryVariables = Exact<{
-  searchString?: InputMaybe<Scalars["String"]["input"]>;
+  where?: InputMaybe<BusinessWhere>;
 }>;
 
 export type GetBusinessesQuery = {
@@ -182,9 +197,12 @@ export const GetBusinessesDocument = {
           kind: "VariableDefinition",
           variable: {
             kind: "Variable",
-            name: { kind: "Name", value: "searchString" },
+            name: { kind: "Name", value: "where" },
           },
-          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          type: {
+            kind: "NamedType",
+            name: { kind: "Name", value: "BusinessWhere" },
+          },
         },
       ],
       selectionSet: {
@@ -196,10 +214,10 @@ export const GetBusinessesDocument = {
             arguments: [
               {
                 kind: "Argument",
-                name: { kind: "Name", value: "searchString" },
+                name: { kind: "Name", value: "where" },
                 value: {
                   kind: "Variable",
-                  name: { kind: "Name", value: "searchString" },
+                  name: { kind: "Name", value: "where" },
                 },
               },
             ],

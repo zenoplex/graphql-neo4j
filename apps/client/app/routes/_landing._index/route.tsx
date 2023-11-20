@@ -15,6 +15,7 @@ export const meta: MetaFunction = () => {
 export const loader = async () => {
   const response = await apolloClient.query({
     query: GetBusinessesDocument,
+    variables: {},
   });
 
   return response.data;
