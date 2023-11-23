@@ -1,7 +1,7 @@
-import type { GetBusinessesQuery } from "~/graphql/operations";
+import type { BusinessFieldsFragment } from "~/graphql/operations";
 
 type Props = {
-  businesses: GetBusinessesQuery["businesses"];
+  businesses: BusinessFieldsFragment[];
 };
 
 export function BusinessResults({ businesses }: Props): JSX.Element {
