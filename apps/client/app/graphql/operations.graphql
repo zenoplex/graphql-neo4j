@@ -1,3 +1,13 @@
+fragment businessFields on Business {
+  businessId
+  name
+  address
+  categories {
+    name
+  }
+}
+
+
 query getBusinessesByCategory($searchString: String!) {
     fuzzyBusinessByName(searchString: $searchString) {
       businessId
@@ -6,11 +16,6 @@ query getBusinessesByCategory($searchString: String!) {
 
 query getBusinesses($where: BusinessWhere) {
   businesses(where: $where) {
-    businessId
-    name
-    address
-    categories {
-      name
-    }
+    ...businessFields
   }
 }
